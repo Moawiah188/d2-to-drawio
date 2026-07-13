@@ -1,6 +1,6 @@
 {
   "name": "d2-to-drawio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "scripts": {
     "test": "node --test test/unit.test.mjs test/snapshot.test.mjs test/cli.test.mjs",
     "snapshots": "node test/run-fixtures.mjs",

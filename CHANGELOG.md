@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-07-14
+
+### Changed
+
+- README now documents the AI-drafted diagram workflow: models write D2 (no coordinates to invent), the layout engine places it, the converted file stays editable in draw.io. Documentation-only release to refresh the npm package page.
+
 ## [1.0.0] - 2026-07-13
 
 ### Added
@@ -21,4 +27,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tooltips and links on shapes and edges.
 - Degradation contract: unsupported features warn on stderr and degrade; `--strict` fails instead. Deterministic, byte-identical output for identical input.
 
+[1.0.1]: https://github.com/Moawiah188/d2-to-drawio/releases/tag/v1.0.1
 [1.0.0]: https://github.com/Moawiah188/d2-to-drawio/releases/tag/v1.0.0
