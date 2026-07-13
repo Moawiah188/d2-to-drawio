@@ -1,0 +1,29 @@
+name: Release
+
+# Publishes to npm via trusted publishing (OIDC) when a version tag is
+# pushed. Requires this repo + workflow to be configured as a Trusted
+# Publisher on the npm package settings page. No npm token is stored.
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.x
+          registry-url: 'https://registry.npmjs.org'
+          cache: npm
+      # Trusted publishing needs npm 11.5.1 or newer.
+      - run: npm install -g npm@latest
+      - run: npm ci
+      - run: npm test
+      - run: npm publish
