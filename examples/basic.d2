@@ -1,0 +1,8 @@
+direction: right
+
+user: Visitor { shape: person }
+app: "Web App"
+db: "Postgres" { shape: cylinder }
+
+user -> app: "browses"
+app -> db: "reads / writes"

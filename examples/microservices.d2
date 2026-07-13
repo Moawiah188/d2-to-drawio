@@ -1,0 +1,35 @@
+direction: right
+
+title: "Order Processing" {
+  shape: text
+  near: top-center
+  style.font-size: 24
+}
+
+customer: Customer { shape: person }
+
+edge: "Edge" {
+  gateway: "API Gateway" {
+    tooltip: Rate limiting and auth live here
+  }
+}
+
+core: "Core Services" {
+  orders: "Orders"
+  billing: "Billing"
+  queue: "Job Queue" { shape: queue }
+
+  orders -> queue: "enqueue"
+  queue -> billing: "charge" { style.stroke-dash: 3 }
+}
+
+db: "Orders DB" {
+  shape: cylinder
+  style.fill: "#F5F5F5"
+}
+
+customer -> edge.gateway: "HTTPS"
+edge.gateway -> core.orders: "REST"
+core.orders <-> db: "reads / writes" {
+  target-arrowhead: "N" { shape: cf-many }
+}
