@@ -1,20 +1,30 @@
 {
   "name": "d2-to-drawio",
-  "version": "0.1.0",
-  "directories": {
-    "doc": "docs",
-    "test": "test"
-  },
+  "version": "1.0.0",
   "scripts": {
     "test": "node --test test/unit.test.mjs test/snapshot.test.mjs test/cli.test.mjs",
     "snapshots": "node test/run-fixtures.mjs",
     "coverage": "node --test --experimental-test-coverage test/unit.test.mjs test/snapshot.test.mjs test/cli.test.mjs"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "d2",
+    "d2lang",
+    "drawio",
+    "draw.io",
+    "diagrams.net",
+    "diagram",
+    "converter",
+    "diagrams-as-code",
+    "cli",
+    "flowchart",
+    "architecture-diagram",
+    "text-to-diagram",
+    "mxgraph",
+    "export"
+  ],
+  "author": "Moawiah Jamal",
   "license": "MIT",
-  "description": "placeholder",
-  "private": "true",
+  "description": "Convert D2 diagrams to editable draw.io / diagrams.net files (.drawio XML) from the CLI or Node.js",
   "type": "module",
   "devDependencies": {
     "fast-xml-parser": "^5.10.0"
@@ -31,5 +41,19 @@
   "exports": {
     ".": "./src/index.js",
     "./package.json": "./package.json"
-  }
+  },
+  "homepage": "https://github.com/Moawiah188/d2-to-drawio#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moawiah188/d2-to-drawio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Moawiah188/d2-to-drawio/issues"
+  },
+  "files": [
+    "src",
+    "bin",
+    "README.md",
+    "LICENSE"
+  ]
 }

@@ -1,0 +1,40 @@
+name: Bug report
+description: A conversion is wrong, crashes, or produces a file draw.io cannot open
+labels: [bug]
+body:
+  - type: textarea
+    id: d2-snippet
+    attributes:
+      label: Offending .d2 snippet
+      description: The smallest D2 input that reproduces the problem.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+      description: What you expected to see in draw.io.
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+      description: What happened instead. Paste warnings/errors and, if useful, the relevant part of the .drawio output.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: d2-to-drawio version
+      placeholder: npx d2-to-drawio --version
+    validations:
+      required: true
+  - type: input
+    id: node-version
+    attributes:
+      label: Node version and OS
+      placeholder: node 24.1.0, Windows 11
+    validations:
+      required: true
