@@ -1,0 +1,1 @@
+sequence diagram messages and lifelines use fixed geometry; they do not re-route when shapes move

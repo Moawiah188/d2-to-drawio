@@ -1,0 +1,2 @@
+sql_table rendered as a single shape with formatted rows, not editable table cells (first: users)
+class rendered as a single shape with formatted members, not editable rows (first: Parser)

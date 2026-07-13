@@ -1,5 +1,0 @@
-WARN: d2 file has no template import; all classes fall back to defaults
-WARN: shape "classes" (in d2) has no geometry in the SVG; skipped
-WARN: class "svc" (on shape web) not found in template; using defaults
-WARN: class "svc" (on shape db) not found in template; using defaults
-WARN: class "svc" (on edge web -> db) not found in template; using defaults

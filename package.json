@@ -6,7 +6,9 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test test/unit.test.mjs test/snapshot.test.mjs test/cli.test.mjs",
+    "snapshots": "node test/run-fixtures.mjs",
+    "coverage": "node --test --experimental-test-coverage test/unit.test.mjs test/snapshot.test.mjs test/cli.test.mjs"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,1 @@
+links to boards (root.layers.ingest) are kept as literal text and will not navigate in draw.io (first: detail_hint)

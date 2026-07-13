@@ -1,0 +1,1 @@
+icons on regular shapes are not mapped; icon dropped (first: server)

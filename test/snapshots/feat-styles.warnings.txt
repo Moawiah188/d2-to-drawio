@@ -1,0 +1,5 @@
+style "multiple" has no draw.io equivalent; ignored (first: tripled)
+style "3d" has no draw.io equivalent; ignored (first: tripled)
+style "double-border" has no draw.io equivalent; ignored (first: tripled)
+style "fillPattern" has no draw.io equivalent; ignored (first: patterned)
+style "animated" has no draw.io equivalent; ignored (first: (pulse -> faded)[0])

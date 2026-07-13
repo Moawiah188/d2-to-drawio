@@ -1,0 +1,1 @@
+markdown text is rendered as plain text; formatting is lost (first: explanation)
