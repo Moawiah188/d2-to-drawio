@@ -47,6 +47,16 @@ Open the committed outputs directly in your browser:
 
 Plenty of teams standardize on draw.io and Confluence for documentation, while the engineers drawing the systems would rather write diagrams as code, version them, and review them in pull requests. Exporting D2 to SVG or PNG hands the team a static picture nobody can edit; switching the whole team to D2 rarely happens. This tool removes that one-way door: engineers keep the `.d2` source of truth, everyone else gets a native `.drawio` file they can open, edit, and paste into Confluence.
 
+## AI-generated diagrams that stay editable
+
+There is a second door this opens: diagrams drafted by an AI. Language models like Claude and ChatGPT write D2 fluently, because D2 is compact text and its layout is automatic: the model writes `api -> queue: enqueue` and never has to decide where anything goes. What models are consistently bad at is spatial placement, which is exactly what generating draw.io XML directly demands (hundreds of hand-invented x/y coordinates that end up overlapping). The workflow this enables:
+
+1. Ask your model: "Describe my architecture as a D2 diagram" and save the answer as `arch.d2`.
+2. `npx d2-to-drawio arch.d2 -o arch.drawio` (a real layout engine, not the model, places everything).
+3. Open it in draw.io and fix the 10 percent a human should fix, by dragging.
+
+The AI does the structure, the layout engine does the geometry, you keep an editable file. None of the three steps fights the other.
+
 ## Quick start
 
 ```
