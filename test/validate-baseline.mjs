@@ -15,7 +15,9 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { XMLParser, XMLValidator } from 'fast-xml-parser';
 
-const goldenDir = join(dirname(fileURLToPath(import.meta.url)), 'golden');
+// Validates test/golden by default; pass a directory argument to validate
+// any other set of .drawio files.
+const goldenDir = process.argv[2] ?? join(dirname(fileURLToPath(import.meta.url)), 'golden');
 
 const parser = new XMLParser({
   ignoreAttributes: false,
