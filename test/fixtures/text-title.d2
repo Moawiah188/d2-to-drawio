@@ -1,0 +1,20 @@
+...@template
+
+title: "System Overview" {
+  shape: text
+  style: {
+    font-size: 24
+    font-color: "#1A1A1A"
+  }
+}
+
+legend: "Legend\nsolid = sync\ndashed = async" {
+  shape: text
+  style: {
+    font-size: 12
+  }
+}
+
+app: "App" { class: svc }
+db: "DB" { class: ext }
+app -> db: "reads" { class: dep }

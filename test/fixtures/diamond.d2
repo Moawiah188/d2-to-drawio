@@ -1,0 +1,8 @@
+...@template
+
+start: "Start" { class: svc }
+check: "Valid?" { class: decision }
+done: "Done" { class: svc }
+
+start -> check: { class: flow }
+check -> done: "yes" { class: flow }

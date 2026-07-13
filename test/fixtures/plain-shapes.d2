@@ -1,0 +1,8 @@
+...@template
+
+web: "Web Client" { class: ext }
+api: "API Server" { class: svc }
+db: "Postgres" { class: svc }
+
+web -> api: "HTTPS" { class: flow }
+api -> db: "SQL" { class: flow }

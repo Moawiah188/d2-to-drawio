@@ -1,0 +1,21 @@
+{
+  "name": "d2-to-drawio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "private": "true",
+  "type": "module",
+  "devDependencies": {
+    "fast-xml-parser": "^5.10.0"
+  }
+}

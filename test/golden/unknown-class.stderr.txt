@@ -1,0 +1,1 @@
+WARN: class "ghost" (on shape ghost) not found in template; using defaults

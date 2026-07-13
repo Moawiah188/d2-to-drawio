@@ -1,0 +1,16 @@
+...@template
+
+core: "Core Platform" {
+  class: zone
+  api: "API" { class: svc }
+  jobs: "Jobs" { class: svc }
+  api -> jobs: "enqueue" { class: flow }
+}
+
+edge: "Edge Layer" {
+  class: zone
+  cdn: "CDN" { class: ext }
+}
+
+edge.cdn -> core.api: "forwards" { class: flow }
+core.jobs -> edge.cdn: { class: dep }

@@ -1,0 +1,8 @@
+...@template
+
+a: "Ingest" { class: svc }
+b: "Store" { class: svc }
+c: "Serve" { class: svc }
+
+a -> b: "step 1: validate (strict)" { class: flow }
+b -> c: "read · write" { class: dep }

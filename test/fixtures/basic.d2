@@ -1,0 +1,8 @@
+...@template
+
+core: "Core Platform" {
+  class: zone
+  pull: "Pull Service" { class: svc }
+  push: "Push Service" { class: svc }
+  pull -> push: "hands off" { class: flow }
+}

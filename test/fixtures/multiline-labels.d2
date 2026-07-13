@@ -1,0 +1,6 @@
+...@template
+
+worker: "Worker\nProcesses background jobs\nRetries on failure" { class: svc }
+sched: "Scheduler\nCron-driven" { class: svc }
+
+sched -> worker: { class: flow }

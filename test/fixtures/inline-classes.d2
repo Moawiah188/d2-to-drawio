@@ -1,0 +1,12 @@
+classes: {
+  svc: {
+    style: {
+      fill: "#DAE8FC"
+    }
+  }
+}
+
+web: "Web App" { class: svc }
+db: "Database" { class: svc }
+
+web -> db: { class: svc }

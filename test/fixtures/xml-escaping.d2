@@ -1,0 +1,6 @@
+...@template
+
+cache: "Cache & Store <hot>" { class: svc }
+q: "Queue \"fifo\"" { class: svc }
+
+cache -> q: "push & pop" { class: flow }
