@@ -41,6 +41,15 @@ export function num(n) {
 }
 
 function vertexXml(cell) {
+  // Edge-label children use relative geometry along their parent edge.
+  if (cell.edgeLabel) {
+    return (
+      `<mxCell id="${escAttr(cell.id)}" value="${escAttr(cell.value)}" style="${escAttr(
+        cell.style
+      )}" vertex="1" connectable="0" parent="${escAttr(cell.parent)}">` +
+      `<mxGeometry x="${num(cell.rx)}" relative="1" as="geometry"/></mxCell>`
+    );
+  }
   const geom = `<mxGeometry x="${num(cell.x)}" y="${num(cell.y)}" width="${num(cell.w)}" height="${num(cell.h)}" as="geometry"/>`;
   const core = (id, value) =>
     `<mxCell${id}${value} style="${escAttr(cell.style)}" vertex="1" parent="${escAttr(cell.parent)}">${geom}</mxCell>`;
@@ -57,17 +66,30 @@ function vertexXml(cell) {
 }
 
 function edgeXml(cell) {
-  let geom;
+  // Fixed endpoints (sourcePoint/targetPoint) carry edges that have no cell
+  // to anchor to, e.g. sequence-diagram lifelines and messages.
+  let inner = '';
+  if (cell.sourcePoint) {
+    inner += `<mxPoint x="${num(cell.sourcePoint.x)}" y="${num(cell.sourcePoint.y)}" as="sourcePoint"/>`;
+  }
+  if (cell.targetPoint) {
+    inner += `<mxPoint x="${num(cell.targetPoint.x)}" y="${num(cell.targetPoint.y)}" as="targetPoint"/>`;
+  }
   if (cell.points && cell.points.length > 0) {
     const pts = cell.points.map((p) => `<mxPoint x="${num(p.x)}" y="${num(p.y)}"/>`).join('');
-    geom = `<mxGeometry relative="1" as="geometry"><Array as="points">${pts}</Array></mxGeometry>`;
-  } else {
-    geom = `<mxGeometry relative="1" as="geometry"/>`;
+    inner += `<Array as="points">${pts}</Array>`;
   }
+  const geom = inner
+    ? `<mxGeometry relative="1" as="geometry">${inner}</mxGeometry>`
+    : `<mxGeometry relative="1" as="geometry"/>`;
+
+  const endpoints =
+    (cell.source ? ` source="${escAttr(cell.source)}"` : '') +
+    (cell.target ? ` target="${escAttr(cell.target)}"` : '');
   const core = (id, value) =>
     `<mxCell${id}${value} style="${escAttr(cell.style)}" edge="1" parent="${escAttr(
       cell.parent
-    )}" source="${escAttr(cell.source)}" target="${escAttr(cell.target)}">${geom}</mxCell>`;
+    )}"${endpoints}>${geom}</mxCell>`;
 
   if (cell.tooltip || cell.link) {
     let attrs = ` label="${escAttr(cell.value)}"`;
@@ -93,10 +115,11 @@ export function emit(pages) {
       page.background && page.background !== 'none'
         ? ` background="${escAttr(page.background)}"`
         : '';
+    const math = page.math ? '1' : '0';
     return (
       `<diagram id="page-${i + 1}" name="${escAttr(page.name)}">` +
       `<mxGraphModel dx="800" dy="600" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" ` +
-      `arrows="1" fold="1" page="0" pageScale="1" math="0" shadow="0"${background}>` +
+      `arrows="1" fold="1" page="0" pageScale="1" math="${math}" shadow="0"${background}>` +
       `<root><mxCell id="0"/><mxCell id="1" parent="0"/>${cells}</root>` +
       `</mxGraphModel></diagram>`
     );
