@@ -1,2 +1,5 @@
 * text=auto eol=lf
 *.png binary
+# Byte-exact fixtures: no newline or BOM normalization.
+test/fixtures/adv-crlf.d2 -text
+test/fixtures/adv-bom.d2 -text

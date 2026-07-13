@@ -23,8 +23,26 @@ const parser = new XMLParser({
   ignoreAttributes: false,
   attributeNamePrefix: '@_',
   preserveOrder: false,
-  isArray: (name) => name === 'mxCell' || name === 'diagram',
+  isArray: (name) =>
+    name === 'mxCell' || name === 'diagram' || name === 'object' || name === 'UserObject',
 });
+
+/**
+ * Normalize root children to one flat cell list. Cells carrying metadata are
+ * wrapped in <object>/<UserObject> elements that hold the id and label while
+ * the inner mxCell holds style and geometry.
+ */
+function collectCells(root) {
+  const cells = [...(root.mxCell ?? [])];
+  for (const name of ['object', 'UserObject']) {
+    for (const wrapper of root[name] ?? []) {
+      const inner = Array.isArray(wrapper.mxCell) ? wrapper.mxCell[0] : wrapper.mxCell;
+      if (!inner) continue;
+      cells.push({ ...inner, '@_id': wrapper['@_id'] });
+    }
+  }
+  return cells;
+}
 
 function validateFile(path) {
   const errors = [];
@@ -56,7 +74,7 @@ function validateFile(path) {
       errors.push('missing <root> under <mxGraphModel>');
       continue;
     }
-    const cells = root.mxCell ?? [];
+    const cells = collectCells(root);
     const ids = new Set(cells.map((c) => c['@_id']));
 
     if (!ids.has('0')) errors.push('missing root cell id="0"');
@@ -78,6 +96,9 @@ function validateFile(path) {
           errors.push(`vertex "${id}": missing mxGeometry`);
           continue;
         }
+        // Edge-label children ride their parent edge with relative
+        // geometry and have no fixed dimensions.
+        if (g['@_relative'] === '1') continue;
         for (const attr of ['x', 'y', 'width', 'height']) {
           const v = g[`@_${attr}`];
           if (v === undefined || Number.isNaN(parseFloat(v))) {
@@ -87,13 +108,25 @@ function validateFile(path) {
       }
 
       if (c['@_edge'] === '1') {
-        for (const end of ['source', 'target']) {
-          const ref = c[`@_${end}`];
-          if (ref === undefined) errors.push(`edge "${id}": missing ${end}`);
-          else if (!ids.has(ref)) errors.push(`edge "${id}": ${end} "${ref}" does not exist`);
-        }
         const g = c.mxGeometry;
         if (!g || g['@_relative'] !== '1') errors.push(`edge "${id}": mxGeometry relative="1" missing`);
+        // Edges anchor to cells via source/target, or float on fixed
+        // sourcePoint/targetPoint geometry (sequence lifelines/messages).
+        const points = g ? [g.mxPoint ?? []].flat() : [];
+        const fixedEnds = points.filter(
+          (p) => p['@_as'] === 'sourcePoint' || p['@_as'] === 'targetPoint'
+        ).length;
+        for (const end of ['source', 'target']) {
+          const ref = c[`@_${end}`];
+          if (ref !== undefined && !ids.has(ref)) {
+            errors.push(`edge "${id}": ${end} "${ref}" does not exist`);
+          }
+        }
+        const anchored =
+          c['@_source'] !== undefined && c['@_target'] !== undefined;
+        if (!anchored && fixedEnds < 2) {
+          errors.push(`edge "${id}": neither cell anchors nor fixed endpoints`);
+        }
       }
     }
   }

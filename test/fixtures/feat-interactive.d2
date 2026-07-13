@@ -1,0 +1,10 @@
+api: "API Gateway" {
+  tooltip: Handles authentication and rate limiting
+  link: https://example.com/docs/api
+}
+db: "Database" {
+  tooltip: "Postgres 16, primary + replica"
+}
+api -> db: "queries" {
+  tooltip: Read path only
+}

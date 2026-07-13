@@ -1,0 +1,23 @@
+overview: "System Overview"
+overview -> detail_hint: "see layers"
+detail_hint: "Details live in layers" { link: layers.ingest }
+
+layers: {
+  ingest: {
+    api: "API Gateway"
+    parser: "Parser"
+    api -> parser: "raw events"
+  }
+  storage: {
+    writer: "Writer"
+    db: "Database" { shape: cylinder }
+    writer -> db: "batched writes"
+  }
+}
+
+scenarios: {
+  degraded: {
+    overview -> detail_hint: "fallback path"
+    cache: "Read-only cache"
+  }
+}

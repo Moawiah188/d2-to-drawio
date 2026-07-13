@@ -1,0 +1,26 @@
+vars: {
+  brand: "#4A6FF3"
+  env: production
+}
+
+classes: {
+  service: {
+    style: {
+      fill: "#DAE8FC"
+      stroke: "#6C8EBF"
+      border-radius: 6
+    }
+  }
+  critical: {
+    style.stroke-width: 3
+  }
+}
+
+gateway: "Gateway (${env})" { class: [service; critical] }
+worker: "Worker" { class: service }
+audit: "Audit" { style.fill: ${brand} }
+
+*.style.font-size: 14
+
+gateway -> worker: "jobs"
+worker -> audit: "events"

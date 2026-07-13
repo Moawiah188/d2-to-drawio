@@ -1,0 +1,7 @@
+flow: {
+  shape: sequence_diagram
+  alice -> bob: "request"
+  bob -> bob: "validate"
+  bob -> alice: "response"
+  alice.t1 -> bob.t1: "span to span"
+}

@@ -1,0 +1,18 @@
+explanation: |md
+  # Ingest pipeline
+  Events flow left to right with **retries**.
+|
+
+formula: |latex
+  \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+|
+
+snippet: |go
+  func retry(n int) error {
+    return backoff(n)
+  }
+|
+
+plain: "Just plain text" { shape: text }
+
+explanation -> plain

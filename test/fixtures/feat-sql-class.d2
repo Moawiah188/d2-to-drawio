@@ -1,0 +1,24 @@
+users: {
+  shape: sql_table
+  id: int { constraint: primary_key }
+  email: varchar(255) { constraint: unique }
+  org_id: int { constraint: foreign_key }
+  created_at: timestamp
+}
+
+orgs: {
+  shape: sql_table
+  id: int { constraint: primary_key }
+  name: varchar(120)
+}
+
+Parser: {
+  shape: class
+  +tokens: "[]Token"
+  -pos: int
+  +peek(): Token
+  +next(): Token
+  -advance(n int): void
+}
+
+users.org_id -> orgs.id: "belongs to"

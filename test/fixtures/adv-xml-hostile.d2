@@ -1,0 +1,6 @@
+amp: "Fish & Chips <hot> \"quoted\" 'single'"
+cdata: "]]> <![CDATA[ tricky"
+attr: "a=\"b\" & c<d>e"
+
+amp -> cdata: "push & <pop>"
+cdata -> attr: "x < y > z"

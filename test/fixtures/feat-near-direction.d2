@@ -1,0 +1,13 @@
+direction: right
+
+title: "Pipeline Overview" {
+  shape: text
+  near: top-center
+  style.font-size: 24
+}
+
+ingest: Ingest
+process: Process { label.near: top-center }
+store: Store { width: 200; height: 90 }
+
+ingest -> process -> store

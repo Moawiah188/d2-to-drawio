@@ -1,0 +1,26 @@
+a -> b: directed
+c <- d: reversed
+e <-> f: both
+g -- h: undirected
+x -> y -> z: chained
+
+er1 <-> er2: "one to many" {
+  source-arrowhead: "1" { shape: cf-one-required }
+  target-arrowhead: "0..*" { shape: cf-many }
+}
+er2 <-> er3: "zero-one to many-required" {
+  source-arrowhead.shape: cf-one
+  target-arrowhead.shape: cf-many-required
+}
+d1 <-> d2: {
+  source-arrowhead: { shape: diamond; style.filled: true }
+  target-arrowhead: { shape: circle }
+}
+d2 <-> d3: {
+  source-arrowhead: { shape: box }
+  target-arrowhead: { shape: cross }
+}
+d3 <-> d4: {
+  source-arrowhead: { shape: arrow }
+  target-arrowhead: { shape: triangle; style.filled: false }
+}
