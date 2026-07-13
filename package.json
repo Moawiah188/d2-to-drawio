@@ -1,7 +1,6 @@
 {
   "name": "d2-to-drawio",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.1.0",
   "directories": {
     "doc": "docs",
     "test": "test"
@@ -11,11 +10,24 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "description": "",
+  "license": "MIT",
+  "description": "placeholder",
   "private": "true",
   "type": "module",
   "devDependencies": {
     "fast-xml-parser": "^5.10.0"
+  },
+  "dependencies": {
+    "@terrastruct/d2": "^0.1.33"
+  },
+  "bin": {
+    "d2-to-drawio": "bin/d2-to-drawio.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./src/index.js",
+    "./package.json": "./package.json"
   }
 }
